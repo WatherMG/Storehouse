@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище databaseModelContainer" CdmEntityContainer="databaseEntities">
+    <EntitySetMapping Name="C_category">
+      <EntityTypeMapping TypeName="databaseModel.C_category">
+        <MappingFragment StoreEntitySet="_category">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_expire">
+      <EntityTypeMapping TypeName="databaseModel.C_expire">
+        <MappingFragment StoreEntitySet="_expire">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="expire_date" ColumnName="expire_date" />
+          <ScalarProperty Name="temperature_id" ColumnName="temperature_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_invoice">
+      <EntityTypeMapping TypeName="databaseModel.C_invoice">
+        <MappingFragment StoreEntitySet="_invoice">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="invoice_code" ColumnName="invoice_code" />
+          <ScalarProperty Name="sale_date" ColumnName="sale_date" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_manufacturer">
+      <EntityTypeMapping TypeName="databaseModel.C_manufacturer">
+        <MappingFragment StoreEntitySet="_manufacturer">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_product">
+      <EntityTypeMapping TypeName="databaseModel.C_product">
+        <MappingFragment StoreEntitySet="_product">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="productCode" ColumnName="productCode" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+          <ScalarProperty Name="manufacturer_id" ColumnName="manufacturer_id" />
+          <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+          <ScalarProperty Name="expire_date_id" ColumnName="expire_date_id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="in_stock" ColumnName="in_stock" />
+          <ScalarProperty Name="image" ColumnName="image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_supplier">
+      <EntityTypeMapping TypeName="databaseModel.C_supplier">
+        <MappingFragment StoreEntitySet="_supplier">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C_temperature">
+      <EntityTypeMapping TypeName="databaseModel.C_temperature">
+        <MappingFragment StoreEntitySet="_temperature">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="temperature" ColumnName="temperature" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

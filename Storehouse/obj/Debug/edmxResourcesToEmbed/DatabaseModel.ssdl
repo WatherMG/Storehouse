@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище databaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="_expire">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="expire_date" Type="int" />
+    <Property Name="temperature_id" Type="int" />
+  </EntityType>
+  <EntityType Name="_invoice">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="invoice_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="sale_date" Type="date" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="quantity" Type="nvarchar" MaxLength="50" />
+    <Property Name="price" Type="money" />
+  </EntityType>
+  <EntityType Name="_manufacturer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" />
+    <Property Name="state" Type="nvarchar" MaxLength="50" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" />
+    <Property Name="ZIP" Type="nvarchar" MaxLength="50" />
+    <Property Name="address" Type="nvarchar" MaxLength="50" />
+    <Property Name="telephone" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="_product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="category_id" Type="int" />
+    <Property Name="manufacturer_id" Type="int" />
+    <Property Name="supplier_id" Type="int" />
+    <Property Name="expire_date_id" Type="int" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="price" Type="money" />
+    <Property Name="in_stock" Type="nvarchar" MaxLength="50" />
+    <Property Name="image" Type="image" />
+  </EntityType>
+  <EntityType Name="_supplier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" />
+    <Property Name="state" Type="nvarchar" MaxLength="50" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" />
+    <Property Name="telephone" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="_temperature">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="temperature" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK___expire__tempera__49C3F6B7">
+    <End Role="_temperature" Type="Self._temperature" Multiplicity="0..1" />
+    <End Role="_expire" Type="Self._expire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_temperature">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="_expire">
+        <PropertyRef Name="temperature_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___invoice__produc__22AA2996">
+    <End Role="_product" Type="Self._product" Multiplicity="0..1" />
+    <End Role="_invoice" Type="Self._invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="_invoice">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__catego__34C8D9D1">
+    <End Role="_category" Type="Self._category" Multiplicity="0..1" />
+    <End Role="_product" Type="Self._product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="_product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__expire__4AB81AF0">
+    <End Role="_expire" Type="Self._expire" Multiplicity="0..1" />
+    <End Role="_product" Type="Self._product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_expire">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="_product">
+        <PropertyRef Name="expire_date_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__manufa__1CF15040">
+    <End Role="_manufacturer" Type="Self._manufacturer" Multiplicity="0..1" />
+    <End Role="_product" Type="Self._product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_manufacturer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="_product">
+        <PropertyRef Name="manufacturer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__suppli__1DE57479">
+    <End Role="_supplier" Type="Self._supplier" Multiplicity="0..1" />
+    <End Role="_product" Type="Self._product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="_supplier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="_product">
+        <PropertyRef Name="supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище databaseModelContainer">
+    <EntitySet Name="_category" EntityType="Self._category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="_expire" EntityType="Self._expire" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="_invoice" EntityType="Self._invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="_manufacturer" EntityType="Self._manufacturer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="_product" EntityType="Self._product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="_supplier" EntityType="Self._supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="_temperature" EntityType="Self._temperature" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK___expire__tempera__49C3F6B7" Association="Self.FK___expire__tempera__49C3F6B7">
+      <End Role="_temperature" EntitySet="_temperature" />
+      <End Role="_expire" EntitySet="_expire" />
+    </AssociationSet>
+    <AssociationSet Name="FK___invoice__produc__22AA2996" Association="Self.FK___invoice__produc__22AA2996">
+      <End Role="_product" EntitySet="_product" />
+      <End Role="_invoice" EntitySet="_invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__catego__34C8D9D1" Association="Self.FK___product__catego__34C8D9D1">
+      <End Role="_category" EntitySet="_category" />
+      <End Role="_product" EntitySet="_product" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__expire__4AB81AF0" Association="Self.FK___product__expire__4AB81AF0">
+      <End Role="_expire" EntitySet="_expire" />
+      <End Role="_product" EntitySet="_product" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__manufa__1CF15040" Association="Self.FK___product__manufa__1CF15040">
+      <End Role="_manufacturer" EntitySet="_manufacturer" />
+      <End Role="_product" EntitySet="_product" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__suppli__1DE57479" Association="Self.FK___product__suppli__1DE57479">
+      <End Role="_supplier" EntitySet="_supplier" />
+      <End Role="_product" EntitySet="_product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

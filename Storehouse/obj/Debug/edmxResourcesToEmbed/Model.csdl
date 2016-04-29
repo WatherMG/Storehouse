@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="databaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="databaseModel.FK___product__catego__34C8D9D1" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Expire">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="expire_date" Type="Int32" />
+    <NavigationProperty Name="Products" Relationship="databaseModel.FK___product__expire__4AB81AF0" FromRole="Expire" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ZIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="databaseModel.FK___product__manufa__1CF15040" FromRole="Manufacturer" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="databaseModel.FK___product__suppli__1DE57479" FromRole="Supplier" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Temperature">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="temperature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="databaseModel.FK__Product__tempera__5AEE82B9" FromRole="Temperature" ToRole="Product" />
+  </EntityType>
+  <EntityContainer Name="databaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Expires" EntityType="Self.Expire" />
+    <EntitySet Name="Manufacturers" EntityType="Self.Manufacturer" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="Temperatures" EntityType="Self.Temperature" />
+    <EntitySet Name="Invoices" EntityType="databaseModel.Invoice" />
+    <EntitySet Name="Products" EntityType="databaseModel.Product" />
+    <AssociationSet Name="FK___product__catego__34C8D9D1" Association="databaseModel.FK___product__catego__34C8D9D1">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__expire__4AB81AF0" Association="databaseModel.FK___product__expire__4AB81AF0">
+      <End Role="Expire" EntitySet="Expires" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK___invoice__produc__22AA2996" Association="databaseModel.FK___invoice__produc__22AA2996">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__manufa__1CF15040" Association="databaseModel.FK___product__manufa__1CF15040">
+      <End Role="Manufacturer" EntitySet="Manufacturers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__suppli__1DE57479" Association="databaseModel.FK___product__suppli__1DE57479">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__tempera__5AEE82B9" Association="databaseModel.FK__Product__tempera__5AEE82B9">
+      <End Role="Temperature" EntitySet="Temperatures" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="invoice_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sale_date" Type="DateTime" Precision="0" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Product" Relationship="databaseModel.FK___invoice__produc__22AA2996" FromRole="Invoice" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="manufacturer_id" Type="Int32" />
+    <Property Name="supplier_id" Type="Int32" />
+    <Property Name="expire_date_id" Type="Int32" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="in_stock" Type="Int32" />
+    <Property Name="temperature_id" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="databaseModel.FK___product__catego__34C8D9D1" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Expire" Relationship="databaseModel.FK___product__expire__4AB81AF0" FromRole="Product" ToRole="Expire" />
+    <NavigationProperty Name="Invoices" Relationship="databaseModel.FK___invoice__produc__22AA2996" FromRole="Product" ToRole="Invoice" />
+    <NavigationProperty Name="Manufacturer" Relationship="databaseModel.FK___product__manufa__1CF15040" FromRole="Product" ToRole="Manufacturer" />
+    <NavigationProperty Name="Supplier" Relationship="databaseModel.FK___product__suppli__1DE57479" FromRole="Product" ToRole="Supplier" />
+    <NavigationProperty Name="Temperature" Relationship="databaseModel.FK__Product__tempera__5AEE82B9" FromRole="Product" ToRole="Temperature" />
+  </EntityType>
+  <Association Name="FK___product__catego__34C8D9D1">
+    <End Type="databaseModel.Category" Role="Category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="databaseModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__expire__4AB81AF0">
+    <End Type="databaseModel.Expire" Role="Expire" Multiplicity="0..1" />
+    <End Type="databaseModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expire">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="expire_date_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___invoice__produc__22AA2996">
+    <End Type="databaseModel.Product" Role="Product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="databaseModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__manufa__1CF15040">
+    <End Type="databaseModel.Manufacturer" Role="Manufacturer" Multiplicity="0..1" />
+    <End Type="databaseModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="manufacturer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__suppli__1DE57479">
+    <End Type="databaseModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+    <End Type="databaseModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__tempera__5AEE82B9">
+    <End Type="databaseModel.Temperature" Role="Temperature" Multiplicity="0..1" />
+    <End Type="databaseModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Temperature">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="temperature_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="databaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C_product" Relationship="Self.FK___product__catego__34C8D9D1" FromRole="C_category" ToRole="C_product" />
+  </EntityType>
+  <EntityType Name="C_expire">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="expire_date" Type="Int32" />
+    <Property Name="temperature_id" Type="Int32" />
+    <NavigationProperty Name="C_temperature" Relationship="Self.FK___expire__tempera__49C3F6B7" FromRole="C_expire" ToRole="C_temperature" />
+    <NavigationProperty Name="C_product" Relationship="Self.FK___product__expire__4AB81AF0" FromRole="C_expire" ToRole="C_product" />
+  </EntityType>
+  <EntityType Name="C_invoice">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="invoice_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sale_date" Type="DateTime" Precision="0" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="C_product" Relationship="Self.FK___invoice__produc__22AA2996" FromRole="C_invoice" ToRole="C_product" />
+  </EntityType>
+  <EntityType Name="C_manufacturer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ZIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C_product" Relationship="Self.FK___product__manufa__1CF15040" FromRole="C_manufacturer" ToRole="C_product" />
+  </EntityType>
+  <EntityType Name="C_product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="manufacturer_id" Type="Int32" />
+    <Property Name="supplier_id" Type="Int32" />
+    <Property Name="expire_date_id" Type="Int32" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="in_stock" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="C_category" Relationship="Self.FK___product__catego__34C8D9D1" FromRole="C_product" ToRole="C_category" />
+    <NavigationProperty Name="C_expire" Relationship="Self.FK___product__expire__4AB81AF0" FromRole="C_product" ToRole="C_expire" />
+    <NavigationProperty Name="C_invoice" Relationship="Self.FK___invoice__produc__22AA2996" FromRole="C_product" ToRole="C_invoice" />
+    <NavigationProperty Name="C_manufacturer" Relationship="Self.FK___product__manufa__1CF15040" FromRole="C_product" ToRole="C_manufacturer" />
+    <NavigationProperty Name="C_supplier" Relationship="Self.FK___product__suppli__1DE57479" FromRole="C_product" ToRole="C_supplier" />
+  </EntityType>
+  <EntityType Name="C_supplier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C_product" Relationship="Self.FK___product__suppli__1DE57479" FromRole="C_supplier" ToRole="C_product" />
+  </EntityType>
+  <EntityType Name="C_temperature">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="temperature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C_expire" Relationship="Self.FK___expire__tempera__49C3F6B7" FromRole="C_temperature" ToRole="C_expire" />
+  </EntityType>
+  <Association Name="FK___product__catego__34C8D9D1">
+    <End Role="C_category" Type="Self.C_category" Multiplicity="0..1" />
+    <End Role="C_product" Type="Self.C_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="C_product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___expire__tempera__49C3F6B7">
+    <End Role="C_temperature" Type="Self.C_temperature" Multiplicity="0..1" />
+    <End Role="C_expire" Type="Self.C_expire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_temperature">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="C_expire">
+        <PropertyRef Name="temperature_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__expire__4AB81AF0">
+    <End Role="C_expire" Type="Self.C_expire" Multiplicity="0..1" />
+    <End Role="C_product" Type="Self.C_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_expire">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="C_product">
+        <PropertyRef Name="expire_date_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___invoice__produc__22AA2996">
+    <End Role="C_product" Type="Self.C_product" Multiplicity="0..1" />
+    <End Role="C_invoice" Type="Self.C_invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="C_invoice">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__manufa__1CF15040">
+    <End Role="C_manufacturer" Type="Self.C_manufacturer" Multiplicity="0..1" />
+    <End Role="C_product" Type="Self.C_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_manufacturer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="C_product">
+        <PropertyRef Name="manufacturer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___product__suppli__1DE57479">
+    <End Role="C_supplier" Type="Self.C_supplier" Multiplicity="0..1" />
+    <End Role="C_product" Type="Self.C_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C_supplier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="C_product">
+        <PropertyRef Name="supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="databaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C_category" EntityType="Self.C_category" />
+    <EntitySet Name="C_expire" EntityType="Self.C_expire" />
+    <EntitySet Name="C_invoice" EntityType="Self.C_invoice" />
+    <EntitySet Name="C_manufacturer" EntityType="Self.C_manufacturer" />
+    <EntitySet Name="C_product" EntityType="Self.C_product" />
+    <EntitySet Name="C_supplier" EntityType="Self.C_supplier" />
+    <EntitySet Name="C_temperature" EntityType="Self.C_temperature" />
+    <AssociationSet Name="FK___product__catego__34C8D9D1" Association="Self.FK___product__catego__34C8D9D1">
+      <End Role="C_category" EntitySet="C_category" />
+      <End Role="C_product" EntitySet="C_product" />
+    </AssociationSet>
+    <AssociationSet Name="FK___expire__tempera__49C3F6B7" Association="Self.FK___expire__tempera__49C3F6B7">
+      <End Role="C_temperature" EntitySet="C_temperature" />
+      <End Role="C_expire" EntitySet="C_expire" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__expire__4AB81AF0" Association="Self.FK___product__expire__4AB81AF0">
+      <End Role="C_expire" EntitySet="C_expire" />
+      <End Role="C_product" EntitySet="C_product" />
+    </AssociationSet>
+    <AssociationSet Name="FK___invoice__produc__22AA2996" Association="Self.FK___invoice__produc__22AA2996">
+      <End Role="C_product" EntitySet="C_product" />
+      <End Role="C_invoice" EntitySet="C_invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__manufa__1CF15040" Association="Self.FK___product__manufa__1CF15040">
+      <End Role="C_manufacturer" EntitySet="C_manufacturer" />
+      <End Role="C_product" EntitySet="C_product" />
+    </AssociationSet>
+    <AssociationSet Name="FK___product__suppli__1DE57479" Association="Self.FK___product__suppli__1DE57479">
+      <End Role="C_supplier" EntitySet="C_supplier" />
+      <End Role="C_product" EntitySet="C_product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
